@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Level 2 - CSS Magic</title>
+    <script src="security.js"></script>
+    <script>
+        // WAJIBKAN LEVEL 1 SELESAI
+        protectPage(1); 
+    </script>
+    <style>
+        body { background: #0a0a0a; color: #39FF14; font-family: monospace; text-align: center; margin-top: 100px; }
+        .invisible-btn { background: #0a0a0a; color: #0a0a0a; border: none; cursor: pointer; font-size: 20px;}
+        .invisible-btn::selection { background: #39FF14; color: black; }
+        input, button { padding: 10px; font-family: monospace; background: #222; color: #39FF14; border: 1px solid #39FF14; }
+    </style>
+</head>
+<body>
+    <h1>Lanjutkan ke level 3</h1>
+    <p>Tapi sepertinya tidak ada tombol apa-apa...</p>
+    
+    <button class="invisible-btn" onclick="alert('FLAG 2: COLOR_HACKED')">KLIK DI SINI UNTUK FLAG 2</button>
+    
+    <br><br>
+    <input type="text" id="input2" placeholder="Masukkan Flag 2">
+    <button onclick="checkFlag(2, 'input2', 'PBYBE_UNPXRQ', 'level3.html')">SUBMIT</button>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Level 5 - The Lazy Clicker</title>
+    <script src="security.js"></script>
+    <script>
+        // Memastikan Level 4 sudah selesai
+        protectPage(4);
+    </script>
+    <style>
+        body { background: #0a0a0a; color: #39FF14; font-family: monospace; text-align: center; margin-top: 100px; }
+        input, button { padding: 10px; font-family: monospace; background: #222; color: #39FF14; border: 1px solid #39FF14; font-size: 1.2rem; margin: 10px; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>POWER GENERATOR</h1>
+    <p>Power System: <span id="power-val" style="font-size: 2rem; color: yellow;">0</span> / 10.000</p>
+    
+    <button onclick="increasePower()">GENERATE POWER (KLIK MANUAL)</button>
+    <p><small>Hint: Apakah kamu mau mengklik 10.000 kali? Coba buka tab 'Console' (F12) dan panggil variabel <code>power</code>!</small></p>
+    
+    <div id="flag5-area" class="hidden" style="margin-top: 30px; border-top: 1px dashed #39FF14; padding-top: 20px;">
+        <h2 style="color: yellow;">SYSTEM OVERLOAD - LOCK BROKEN!</h2>
+        <p>FLAG 5: <strong>JS_MASTER</strong></p>
+        
+        <input type="text" id="input5" placeholder="Masukkan Flag 5">
+        <button onclick="checkFlag(5, 'input5', 'WF_ZNFGRE', 'level6.html')">LANJUT KE FINAL</button>
+    </div>
+
+    <script>
+        // Variabel global yang akan di-hack oleh siswa via Console
+        var power = 0; 
+        
+        function increasePower() {
+            power++;
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('power-val').innerText = power.toLocaleString();
+            // Jika siswa curang lewat console (power = 10000), ini akan terpicu
+            if(power >= 10000) {
+                document.getElementById('flag5-area').classList.remove('hidden');
+            }
+        }
+
+        // Loop untuk memantau perubahan variabel dari console setiap setengah detik
+        setInterval(() => {
+            if(power >= 10000) {
+                updateUI();
+            }
+        }, 500);
+    </script>
+</body>
+</html>

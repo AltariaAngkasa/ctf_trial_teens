@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Level 6 - Master Override</title>
+    <script src="security.js"></script>
+    <script>
+        // Memastikan Level 5 sudah selesai
+        protectPage(5);
+    </script>
+    <style>
+        body { background: #0a0a0a; color: #39FF14; font-family: monospace; text-align: center; margin-top: 100px; }
+        input, button { padding: 10px; font-family: monospace; background: #222; color: #39FF14; border: 1px solid #39FF14; font-size: 1.2rem; }
+        .hidden { display: none; }
+        #success-screen { margin-top: 50px; }
+    </style>
+</head>
+<body>
+    <div id="challenge-area">
+        <h1 style="color: red; font-size: 2.5rem;">BRANKAS UTAMA (FINAL BOSS)</h1>
+        <p>Sistem membutuhkan "Master Password" 5 Huruf.</p>
+        <p><i>Hint: Ambil huruf pertama dari setiap kalimat FLAG 1 sampai FLAG 5 yang sudah kamu tulis di logbook!</i></p>
+        <br>
+        
+        <input type="text" id="input6" maxlength="5" placeholder="?????">
+        <button onclick="checkFinal()">UNLOCK SYSTEM</button>
+    </div>
+
+    <div id="success-screen" class="hidden">
+        <h1 style="font-size: 5rem; margin: 0;">🎆 🎇 🎆</h1>
+        <h1 style="color: yellow; font-size: 3rem;">SYSTEM SAVED!</h1>
+        <h2>WHITE HAT CERTIFIED</h2>
+        <p>Misi Selesai, Agen! Kamu telah mengambil alih kendali dan menyelamatkan sekolah dari peretas.</p>
+        <br>
+        <button onclick="restartGame()">RESTART SYSTEM</button>
+    </div>
+
+    <script>
+        // Karena ini final, fungsinya kita buat khusus di file ini
+        function checkFinal() {
+            let val = document.getElementById('input6').value.toUpperCase();
+            
+            // SPSHW adalah sandi ROT13 dari FCFUJ (Koreksi dari SPHWX di pesan sebelumnya)
+            // F(First), C(Color), F(Flag), U(URL), J(JS)
+            if (rot13(val) === 'SPSHW') {
+                document.getElementById('challenge-area').classList.add('hidden');
+                document.getElementById('success-screen').classList.remove('hidden');
+                // Tandai game tamat agar tidak di-bypass
+                sessionStorage.setItem("game_cleared", "true"); 
+            } else {
+                alert("ACCESS DENIED: Master Password Salah! Cek lagi huruf pertama dari kelima FLAG-mu.");
+            }
+        }
+
+        // Fitur untuk mereset game jika ingin dicoba oleh siswa lain
+        function restartGame() {
+            sessionStorage.clear(); // Bersihkan semua riwayat level
+            window.location.href = "level1.html"; // Kembalikan ke garis start
+        }
+    </script>
+</body>
+</html>

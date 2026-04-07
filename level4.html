@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Level 4 - The Backdoor Key</title>
+    <script src="security.js"></script>
+    <script>
+        // Memastikan siswa tidak melompat. Harus selesaikan Level 3 dulu.
+        protectPage(3);
+    </script>
+    <style>
+        body { 
+            background: #0a0a0a; 
+            color: #39FF14; 
+            font-family: 'Courier New', monospace; 
+            text-align: center; 
+            margin-top: 100px; 
+        }
+        #status-box { 
+            padding: 20px; 
+            font-size: 1.5rem;
+            font-weight: bold; 
+            background: darkred; 
+            color: white; 
+            display: inline-block; 
+            border: 2px solid white;
+        }
+        input, button { 
+            padding: 10px; 
+            font-family: monospace; 
+            background: #222; 
+            color: #39FF14; 
+            border: 1px solid #39FF14; 
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>SYSTEM FIREWALL</h1>
+    
+    <div id="status-box">
+        ACCESS DENIED! Status Anda: <span id="status-text">Guest</span>
+    </div>
+    
+    <p>Sistem mendeteksi Anda sebagai tamu. Hacker sejati tahu cara masuk lewat 'pintu belakang'.</p>
+    <p><i>Hint: Perhatikan baik-baik alamat website (URL) di bagian atas browsermu! Bisakah kamu mengubah statusmu?</i></p>
+
+    <div id="flag-area" class="hidden" style="margin-top: 40px; border-top: 1px dashed #39FF14; padding-top: 20px;">
+        <h2 style="color: yellow;">SYSTEM OVERRIDDEN!</h2>
+        <p>Bagus! Kamu berhasil memanipulasi parameter URL.</p>
+        <p>FLAG 4: <strong>URL_BYPASS</strong></p>
+        
+        <input type="text" id="input4" placeholder="Masukkan Flag 4">
+        <button onclick="checkFlag(4, 'input4', 'HEY_OLCNFF', 'level5.html')">LANJUT KE LEVEL 5</button>
+    </div>
+
+    <script>
+        // === LOGIKA INTI LEVEL 4 ===
+        // 1. Mengambil parameter dari URL saat ini
+        let params = new URLSearchParams(window.location.search);
+        
+        // 2. Mengecek apakah ada parameter 'status' dan apakah isinya 'admin'
+        if (params.get("status") === "admin") {
+            
+            // Jika berhasil, ubah tampilan layar!
+            document.getElementById("status-box").style.background = "darkgreen";
+            document.getElementById("status-box").innerHTML = "ACCESS GRANTED! Status Anda: Admin";
+            
+            // Munculkan kotak rahasia berisi FLAG
+            document.getElementById("flag-area").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>

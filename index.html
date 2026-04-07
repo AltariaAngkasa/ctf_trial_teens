@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operation: White Hat - Start Mission</title>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #39FF14;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            border: 2px solid #39FF14;
+            padding: 40px;
+            max-width: 600px;
+            background-color: #111;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-top: 0;
+            text-shadow: 0 0 10px #39FF14;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        .alert-text {
+            color: #ff3333;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 0 5px red;
+        }
+
+        button {
+            background-color: #39FF14;
+            color: #0a0a0a;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+            box-shadow: 0 0 20px white;
+            transform: scale(1.05);
+        }
+
+        #loading-screen {
+            display: none;
+            color: yellow;
+            font-size: 1.5rem;
+            line-height: 2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-menu">
+        <h1>OPERATION: WHITE HAT</h1>
+        <p class="alert-text">⚠️ PERINGATAN DARURAT ⚠️</p>
+        <p>
+            Sistem keamanan sekolah kita sedang diretas! Data penting siswa dan guru terancam dihapus secara permanen. 
+            Kami membutuhkan bantuan agen White Hat (Hacker Baik) untuk menghentikan serangan ini.
+            <br><br>
+            Tugasmu adalah menyusup ke dalam sistem, menemukan <strong>6 FLAG (Kode Rahasia)</strong>, 
+            dan mengambil alih kembali kendali utama sebelum waktu habis!
+        </p>
+        <button onclick="startMission()">TERIMA MISI</button>
+    </div>
+
+    <div class="container" id="loading-screen">
+        INITIALIZING PROTOCOL...<br>
+        BYPASSING FIREWALL...<br>
+        CONNECTING TO MAINFRAME...
+    </div>
+
+    <script>
+        function startMission() {
+            // 1. Bersihkan session storage agar game benar-benar mulai dari awal (Anti-Cheat)
+            sessionStorage.clear();
+
+            // 2. Sembunyikan menu utama, tampilkan layar loading
+            document.getElementById('main-menu').style.display = 'none';
+            document.getElementById('loading-screen').style.display = 'block';
+
+            // 3. Jeda 2,5 detik sebelum pindah ke Level 1 untuk memberi efek tegang
+            setTimeout(() => {
+                window.location.href = "level1.html";
+            }, 2500);
+        }
+    </script>
+
+</body>
+</html>
