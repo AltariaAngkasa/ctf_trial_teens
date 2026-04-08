@@ -68,9 +68,28 @@
 
         #loading-screen {
             display: none;
-            color: yellow;
-            font-size: 1.5rem;
+            color: #39FF14; 
+            font-size: 1.2rem;
             line-height: 2;
+            text-align: left;
+            border: none;
+            box-shadow: none;
+            background: transparent;
+            white-space: pre-wrap;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2rem;
+            background-color: #39FF14;
+            animation: blink 1s step-end infinite;
+            vertical-align: bottom;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
     </style>
 </head>
@@ -90,24 +109,51 @@
     </div>
 
     <div class="container" id="loading-screen">
-        INITIALIZING PROTOCOL...<br>
-        BYPASSING FIREWALL...<br>
-        CONNECTING TO MAINFRAME...
+        <span id="terminal-text"></span><span class="cursor"></span>
     </div>
 
     <script>
         function startMission() {
-            // 1. Bersihkan session storage agar game benar-benar mulai dari awal (Anti-Cheat)
             sessionStorage.clear();
-
-            // 2. Sembunyikan menu utama, tampilkan layar loading
             document.getElementById('main-menu').style.display = 'none';
             document.getElementById('loading-screen').style.display = 'block';
 
-            // 3. Jeda 2,5 detik sebelum pindah ke Level 1 untuk memberi efek tegang
-            setTimeout(() => {
-                window.location.href = "level1.html";
-            }, 2500);
+            const hackingText = [
+                "INITIALIZING PROTOCOL...",
+                "BYPASSING FIREWALL...",
+                "DECRYPTING SECURITY KEYS...",
+                "CONNECTING TO MAINFRAME...",
+                "ACCESS GRANTED.",
+                "Entering Level 1..."
+            ];
+
+            const textElement = document.getElementById('terminal-text');
+            let lineIndex = 0;
+            let charIndex = 0;
+            const typingSpeed = 50; // Kecepatan ketik (milidetik) per huruf
+            const lineDelay = 500; // Jeda sebelum mengetik baris baru (milidetik)
+
+            function typeWriter() {
+                if (lineIndex < hackingText.length) {
+                    if (charIndex < hackingText[lineIndex].length) {
+                        textElement.innerHTML += hackingText[lineIndex].charAt(charIndex);
+                        charIndex++;
+                        setTimeout(typeWriter, typingSpeed);
+                    } else {
+                        textElement.innerHTML += "\n";
+                        lineIndex++;
+                        charIndex = 0;
+                        setTimeout(typeWriter, lineDelay);
+                    }
+                } else {
+                    setTimeout(() => {
+                        window.location.href = "level1.html";
+                    }, 800); 
+                }
+            }
+
+            // Mulai animasi ketik
+            typeWriter();
         }
     </script>
 
